@@ -351,7 +351,7 @@ export default function Portfolio() {
               </MagneticButton>
               <MagneticButton
                 href={CV_URL}
-                download="Bita-Bahadori-CV.pdf"
+                download="BitaBahadori.pdf"
                 className={`${HERO_BTN} bg-slate-900/60 text-slate-200 border border-slate-800 hover:border-brand/50 hover:text-white hover:bg-slate-800/60`}
               >
                 <FileDown size={18} className="text-brand shrink-0" aria-hidden="true" />
