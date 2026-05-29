@@ -3,11 +3,19 @@
 @theme {
   --color-brand: #1f6f5f;
   --color-brand-dark: #19594c;
+  --color-bg: #020617;
+  --color-surface: #0b1224;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.25rem;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -25,6 +33,17 @@ html {
 }
 
 @layer base {
+  :root {
+    color-scheme: dark;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-bg);
+  }
+
   strong {
     font-weight: 600;
     color: var(--color-white);
@@ -34,5 +53,389 @@ html {
   button:focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .bb-container {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .bb-container {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .bb-grid {
+    background-image:
+      radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--color-white) 10%, transparent) 1px, transparent 0);
+    background-size: 28px 28px;
+    opacity: 0.25;
+    mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
+  }
+
+  .bb-cursor-spotlight {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 250ms ease;
+    background: radial-gradient(
+      600px circle at var(--bb-cx, 50%) var(--bb-cy, 20%),
+      color-mix(in oklab, var(--color-brand) 28%, transparent),
+      transparent 60%
+    );
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .bb-cursor-spotlight {
+      opacity: 1;
+    }
+  }
+
+  /* Enhanced Keyframe Animations */
+  @keyframes bb-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bb-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes bb-slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes bb-slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes bb-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bb-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes bb-pulse-glow {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes bb-shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes bb-gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bb-rotate-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes bb-bounce-subtle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Animation Classes */
+  .bb-animate-fade-up {
+    animation: bb-fade-up 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .bb-animate-fade-in {
+    animation: bb-fade-in 600ms ease-out both;
+  }
+
+  .bb-animate-slide-left {
+    animation: bb-slide-in-left 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .bb-animate-slide-right {
+    animation: bb-slide-in-right 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .bb-animate-scale-in {
+    animation: bb-scale-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .bb-animate-float {
+    animation: bb-float 6s ease-in-out infinite;
+  }
+
+  .bb-animate-pulse-glow {
+    animation: bb-pulse-glow 3s ease-in-out infinite;
+  }
+
+  .bb-animate-gradient {
+    background-size: 200% 200%;
+    animation: bb-gradient-shift 8s ease infinite;
+  }
+
+  .bb-animate-rotate-slow {
+    animation: bb-rotate-slow 20s linear infinite;
+  }
+
+  .bb-animate-bounce-subtle {
+    animation: bb-bounce-subtle 2s ease-in-out infinite;
+  }
+
+  /* Stagger Delays */
+  .bb-stagger-1 {
+    animation-delay: 100ms;
+  }
+
+  .bb-stagger-2 {
+    animation-delay: 200ms;
+  }
+
+  .bb-stagger-3 {
+    animation-delay: 300ms;
+  }
+
+  .bb-stagger-4 {
+    animation-delay: 400ms;
+  }
+
+  .bb-stagger-5 {
+    animation-delay: 500ms;
+  }
+
+  .bb-stagger-6 {
+    animation-delay: 600ms;
+  }
+
+  /* Glass Effect */
+  .bb-glass {
+    background: color-mix(in oklab, var(--color-bg) 70%, transparent);
+    border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .bb-glass-strong {
+    background: color-mix(in oklab, var(--color-bg) 85%, transparent);
+    border-color: color-mix(in oklab, var(--color-white) 15%, transparent);
+    backdrop-filter: blur(16px);
+  }
+
+  /* Reveal Animation */
+  .bb-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .bb-reveal.bb-in {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  /* Shimmer Effect */
+  .bb-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bb-shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    animation: bb-shimmer 3s infinite;
+  }
+
+  /* Magnetic Effect */
+  .bb-magnetic {
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Glow Effect */
+  .bb-glow {
+    position: relative;
+  }
+
+  .bb-glow::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+      45deg,
+      var(--color-brand),
+      #10b981,
+      var(--color-brand)
+    );
+    opacity: 0;
+    transition: opacity 300ms ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  .bb-glow:hover::before {
+    opacity: 0.6;
+  }
+
+  /* Parallax Layers */
+  .bb-parallax-slow {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Gradient Text */
+  .bb-gradient-text {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #e2e8f0 25%,
+      var(--color-brand) 50%,
+      #10b981 75%,
+      var(--color-brand) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bb-gradient-shift 8s ease infinite;
+  }
+
+  /* Card Hover Effects */
+  .bb-card-hover {
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .bb-card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* Border Gradient Animation */
+  .bb-border-gradient {
+    position: relative;
+    background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(135deg, var(--color-brand), #10b981, var(--color-brand))
+        border-box;
+    border: 1px solid transparent;
+    background-size: 200% 200%;
+    animation: bb-gradient-shift 6s ease infinite;
+  }
+
+  /* Smooth Transitions */
+  .bb-transition-smooth {
+    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .bb-transition-fast {
+    transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Text Reveal */
+  .bb-text-reveal {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: bb-fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Backdrop Blur Variants */
+  .bb-backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+
+  .bb-backdrop-blur-md {
+    backdrop-filter: blur(8px);
+  }
+
+  .bb-backdrop-blur-lg {
+    backdrop-filter: blur(12px);
+  }
+
+  .bb-backdrop-blur-xl {
+    backdrop-filter: blur(16px);
   }
 }
