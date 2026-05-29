@@ -313,7 +313,7 @@ export default function Portfolio() {
             </div>
             
             <h1 className="text-[2.25rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">
-              <span className="bb-animate-fade-up inline-block text-white">Hi, I&apos;m  </span>
+              <span className="bb-animate-fade-up inline-block text-white">Hi, I&apos;m     </span>
               <span className="bb-animate-fade-up bb-stagger-1 inline-block bb-gradient-text">
                   Bita Bahadori
               </span>
