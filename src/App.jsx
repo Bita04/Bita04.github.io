@@ -333,7 +333,7 @@ export default function Portfolio() {
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-sm text-slate-400 bb-animate-fade-up bb-stagger-4">
               <span className="flex items-center gap-1.5 group">
                 <MapPin size={16} className="text-brand group-hover:scale-110 transition-transform" aria-hidden="true" /> 
-                Munich, Germany
+                Tehran, Iran
               </span>
               <span className="hidden sm:inline w-1 h-1 rounded-full bg-slate-700" aria-hidden="true" />
               <span className="inline-flex items-center gap-2">
@@ -476,7 +476,9 @@ export default function Portfolio() {
                 <BulletItem>
                   Led the front-end architecture of an enterprise project management platform using{' '}
                   <strong>Angular</strong> (standalone components) and <strong>TypeScript</strong>,
-                  establishing scalable patterns for feature delivery across multiple teams.
+                  establishing scalable patterns for feature delivery across multiple teams. 
+                  The average task completion time dropped by 23%, while user engagement increased {' '}
+                  by 17%, according to data collected in <strong>Amplitude</strong>.
                 </BulletItem>
                 <BulletItem>
                   Implemented predictable state management with <strong>NgRx</strong> (Store, Effects,
